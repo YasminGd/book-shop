@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>book shop</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body onload="onInit()">
+
+    <h1 data-trans="page-title" class="page-title">Fr🐸gi's Book Shop</h1>
+
+    <select onchange="onSetLang(this.value)">
+        <option selected value="en">English</option>
+        <option value="he">עברית</option>
+    </select>
+
+    <section>
+        <form onsubmit="onAddBook(event)" class="new-book">
+            <input type="text" data-trans="new-book-name" placeholder="Enter the new book's name"
+                class="new-book-name" />
+            <input type="text" data-trans="new-book-price" placeholder="Enter the new book's price"
+                class="new-book-price" />
+            <button data-trans="new-book-btn" class="new-book-btn">Add a new Book</button>
+            <p data-trans="warning" class="warning">Please enter proper input</p>
+        </form>
+    </section>
+
+    <section class="filter">
+        <label data-trans="max-price">
+            Max price:
+        </label>
+        <input class="filter-by-max-price" type="range" min="0" max="100"
+            oninput="this.title = this.value; onSetFilterBy({maxPrice: +this.value})" />
+        <label data-trans="min-rate">
+            Min rating:
+        </label>
+        <input class="filter-by-min-rate" type="range" min="0" max="10"
+            oninput="this.title = this.value; onSetFilterBy({minRate: +this.value})" />
+        <input type="text" data-trans="search" placeholder="search a keyword"
+            oninput="onSetSearchByTitle(this.value)" />
+    </section>
+
+    <table>
+        <thead>
+            <th data-trans="id">Id</th>
+            <th data-trans="img" class="img">Img</th>
+            <th data-trans="book-title" class="title" onclick="onSetSortBy('title')">Title</th>
+            <th data-trans="book-price" class="price" onclick="onSetSortBy('price')">Price</th>
+            <th data-trans="actions" colspan="3">Actions</th>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <div class="paging">
+        <button data-trans="prev" class="prev" value="-1" onclick="onPageChange(+this.value)">Prev</button>
+        <button data-trans="next" class="next" value="1" onclick="onPageChange(+this.value)">Next</button>
+    </div>
+
+    <div class="modal modal-hide modal-update ">
+        <p></p>
+    </div>
+
+    <div class="modal modal-hide modal-details"></div>
+
+    <script src="js/services/util.service.js"></script>
+    <script src="js/services/storage.service.js"></script>
+    <script src="js/services/i18n.service.js"></script>
+    <script src="js/services/modal.service.js"></script>
+    <script src="js/book-shop.controller.js"></script>
+</body>
+
+</html>
