@@ -27,7 +27,7 @@ const gTrans = {
     },
     'min-rate': {
         en: 'Min rating:',
-        he: 'חוות דעת מינימאלית'
+        he: 'חוות דעת מינימאלית:'
     },
     id: {
         en: 'id',
