@@ -24,3 +24,19 @@ function makeLorem(wordCount = 2) {
     }
     return txt
 }
+
+function makeLoremHe(wordCount = 2) {
+    const words = ['אכל', 'חתול', 'חוף', 'איש', 'אדמה', 'פינה', 'קעקוע', 'עצוב', 'שמח', 'אהבה', 'פחות או יותר', 'אני', 'הוא', 'סיפור', 'ארון', 'בוכה', 'וגם', 'כרגיל', 'קורה', 'תיקים', 'כל פעם', 'זה', 'היה', 'סיפור', 'זה', 'תופי', 'געגוע', 'בכי', 'להישרף']
+    var txt = ''
+    while (wordCount > 0) {
+        wordCount--
+        txt += words[Math.floor(Math.random() * words.length)] + ' '
+    }
+    return txt
+}
+
+function exchangeMoney(num) {
+    const currLang = getCurrLang()
+
+    return currLang === 'en' ? num : num * 3.5
+}

@@ -1,6 +1,5 @@
 'use strict'
 
-
 const gTrans = {
     'page-title': {
         en: 'Fr🐸gi\'s Book Shop',
@@ -65,7 +64,7 @@ const gTrans = {
     search: {
         en: 'search a keyword',
         he: 'חיפוש באמצעות מילות מפתח'
-    }, 
+    },
     read: {
         en: 'read',
         he: 'לקרוא'
@@ -81,6 +80,14 @@ const gTrans = {
     'book deleted': {
         en: 'Book deleted',
         he: 'הספר נמחק'
+    },
+    'book updated': {
+        en: 'Book updated',
+        he: 'הספר עודכן'
+    },
+    'book created': {
+        en: 'Book added',
+        he: 'הספר נוסף'
     }
 }
 
@@ -108,6 +115,10 @@ function doTrans() {
         el.innerText = translateVal
         if (el.placeholder !== undefined) el.placeholder = translateVal
     })
+}
+
+function getCurrLang() {
+    return gCurrLang
 }
 
 

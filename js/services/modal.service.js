@@ -14,10 +14,10 @@ _createBooks()
 
 
 function getBooksForDisplay() {
-    console.log(gFilterBy);
     var books = gBooks.filter(book => book.price <= gFilterBy.maxPrice && book.rate >= gFilterBy.minRate)
     if (gRegex) {
-        books = books.filter(book => gRegex.test(book.title))
+        const currLang = getCurrLang()
+        books = books.filter(book => gRegex.test(book.title[currLang]))
     }
 
     gPage.maxPage = parseInt(books.length / PAGE_SIZE)
@@ -36,6 +36,7 @@ function removeBook(bookId) {
 
 function addBook(title, price) {
     if (!title || !price) return
+
     const book = _createBook(title, price)
     gBooks.unshift(book)
     saveToStorage(KEY_BOOKS, gBooks)
@@ -82,9 +83,11 @@ function setBookFilter(filterBy = {}) {
     return gFilterBy
 }
 
-function SetSortBy(sort) {
+function setSortBy(sort) {
+    const currLang = getCurrLang()
+
     gSortBy[sort] = -gSortBy[sort]
-    if (sort === 'title') gBooks.sort((book1, book2) => book1.title.localeCompare(book2.title) * gSortBy[sort])
+    if (sort === 'title') gBooks.sort((book1, book2) => book1.title[currLang].localeCompare(book2.title[currLang]) * gSortBy[sort])
     if (sort === 'price') gBooks.sort((book1, book2) => (book1.price - book2.price) * gSortBy[sort])
     gPage.page = 0
 }
@@ -103,6 +106,25 @@ function pageChange(change) {
     gPage.page += change
 }
 
+function getCurrency() {
+    const currLang = getCurrLang()
+    var curr = {}
+
+    if (currLang === 'en') {
+        curr = {
+            style: 'currency',
+            currency: 'USD'
+        }
+    }
+    else {
+        curr = {
+            style: 'currency',
+            currency: 'ILS'
+        }
+    }
+
+    return curr
+}
 
 //---------------------------------
 
@@ -124,12 +146,23 @@ function _createBooks() {
 }
 
 function _createBook(name, price = getRandomInt(1, 51)) {
-    return {
+
+    const currLang = getCurrLang()
+    const book = {
         id: makeId(3),
         img: getRandomInt(1, 10),
-        title: name,
+        title: {
+            en: makeLorem(),
+            he: makeLoremHe()
+        },
         price: price,
-        summery: makeLorem(200),
+        summery: {
+            en: makeLorem(200),
+            he: makeLoremHe(200)
+        },
         rate: getRandomInt(0, 11)
     }
+
+    book.title[currLang] = name
+    return book
 }

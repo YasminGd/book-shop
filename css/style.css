@@ -72,7 +72,7 @@ h1 {
 
 }
 
-button {
+button, select {
     border: none;
     padding: 10px;
     border-radius: 2rem;
