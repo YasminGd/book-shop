@@ -121,4 +121,14 @@ function getCurrLang() {
     return gCurrLang
 }
 
+function getPrice(price) {
+    const num = gCurrLang === 'en' ? price : price * 3.5
+    var curr = {}
+
+    curr.style = 'currency'
+    curr.currency = gCurrLang === 'en' ? 'USD' : 'ILS'
+
+    return new Intl.NumberFormat(gCurrLang, curr).format(num)
+}
+
 

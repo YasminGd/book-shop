@@ -107,21 +107,6 @@ function pageChange(change) {
 }
 
 function getCurrency() {
-    const currLang = getCurrLang()
-    var curr = {}
-
-    if (currLang === 'en') {
-        curr = {
-            style: 'currency',
-            currency: 'USD'
-        }
-    }
-    else {
-        curr = {
-            style: 'currency',
-            currency: 'ILS'
-        }
-    }
 
     return curr
 }

@@ -31,7 +31,7 @@ function renderBooks() {
                     ${book.title[currLang]}
                 </td>   
                 <td>
-                   ${new Intl.NumberFormat(currLang, getCurrency()).format(exchangeMoney(book.price))}
+                   ${getPrice(book.price)}
                 </td >
                 <td>    
                     <button data-trans="read" onclick="onShowBookDetails('${book.id}')"></button> 
@@ -110,13 +110,12 @@ function flashMsg(msg) {
 function onShowBookDetails(bookId) {
     const book = getBookById(bookId)
     const currLang = getCurrLang()
-    const bookPrice = new Intl.NumberFormat(currLang, getCurrency()).format(exchangeMoney(book.price))
 
     const modalHTML = `
     <button class="modal-details-close-btn" onclick = "onHideBookDetails()" >X</button>
     <h1>${book.title[currLang]}</h1>
     <img src="img/${book.img}.jpg" alt="" />
-    <h2 data-trans="price">${getTrans('price')} ${bookPrice}</h2>
+    <h2 data-trans="price">${getTrans('price')} ${getPrice(book.price)}</h2>
     <p>${book.summery[currLang]}</p>
     <div class="rating-container">
         <button class="rating-btn" value="-1" onclick="onChangeRating(this.value)">-</button>

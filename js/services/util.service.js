@@ -35,8 +35,3 @@ function makeLoremHe(wordCount = 2) {
     return txt
 }
 
-function exchangeMoney(num) {
-    const currLang = getCurrLang()
-
-    return currLang === 'en' ? num : num * 3.5
-}
